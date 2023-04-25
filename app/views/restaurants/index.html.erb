@@ -1,0 +1,41 @@
+<h1>Restaurants</h1>
+<%= form_with(url: restaurants_path, method: "get") do |f| %>
+  <%= f.label :dish_name, "Search Dish:" %>
+  <%= f.text_field :dish_name %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<table width="500" border="1">
+  <thead>
+    <tr>
+      <th bgcolor="yellow">Restaurant</th>
+      <th bgcolor="yellow">status<th>
+      <th bgcolor="yellow">Reviews<th>
+      <th bgcolor="yellow">Dish</th>
+      <th bgcolor="yellow">Price<th>
+       
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= restaurant.title %></td>
+        <td><%= restaurant.status %></td>
+        <td><%= link_to "Give Review", new_review_path(restaurant_id: restaurant.id) %></td>
+        <% if user_signed_in? %> 
+        <td>
+          <%= link_to "Show", restaurant_path(restaurant), class: "btn btn-primary" %><br>
+          <%= link_to "Edit", edit_restaurant_path(restaurant), class: "btn btn-primary" %><br>
+          <%= link_to "Delete", restaurant_path(restaurant), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger" %>
+        </td>
+        <% end %>
+        
+          <% restaurant.dishes.each do |dish| %>
+            <td><%= dish.name %></td><br>
+            <td><%= dish.price %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

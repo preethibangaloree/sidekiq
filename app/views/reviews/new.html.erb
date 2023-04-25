@@ -1,0 +1,14 @@
+<%= form_for @review do |f| %>
+ 
+  
+  <%= f.label :rating %>
+  <%= f.select :rate, (1..5) %>
+
+   <%= f.label :comments %>
+  <%= f.text_area :comments %>
+  
+  <%= f.hidden_field :reviewable_id, value: @restaurant.id %>
+  <%= f.hidden_field :reviewable_type, value: @restaurant.class.to_s %>
+  
+  <%= f.submit %>
+<% end %>

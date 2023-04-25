@@ -1,0 +1,21 @@
+<marquee class="css2" direction="right"><b>Welcome to our Restaurant!!</b></marquee>
+
+<br>
+<% if user_signed_in? %> 
+ <div> Welcome <%= current_user.email %> </div> 
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <center>
+    <%= link_to 'Register Your restaurant here!!!', new_restaurant_path %>
+  </center>
+  <%= link_to 'Registered restaurant list', restaurants_path %>
+  
+<% else %>
+  <%= button_to "Sign in", new_user_session_path %> 
+  <center>
+<%= form_with(url: restaurants_path, method: "get") do |f| %>
+  <%= f.label :dish_name, "Search Dish:" %>
+  <%= f.text_field :dish_name %>
+  <%= f.submit "Search" %>
+<% end %>
+</center>
+<% end %>

@@ -1,0 +1,21 @@
+<center>
+<marquee class="css2" direction="right"><b>Register Here !!!!!</b></marquee>
+<%= form_for(@restaurant) do |f| %>
+  <%= f.label :restaurant_name %>
+  <%= f.text_field :title %>
+<br>
+  <%= f.label :status %>
+  <%= f.select :status, options_for_select([['Open', 'open'], ['Closed', 'closed']]), {}, { class: 'form-control' } %>
+  <br>
+
+  <%= f.fields_for :dishes do |dish_fields| %>
+    <%= dish_fields.label :dish_name %>
+    <%= dish_fields.text_field :name %>
+<br>
+    <%= dish_fields.label :price %>
+    <%= dish_fields.text_field :price %>
+  <% end %>
+<br><br>
+  <%= f.submit %>
+<% end %>
+</center>
